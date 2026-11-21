@@ -1,0 +1,6 @@
+{
+  "name": "SiPTJ Pro — Sistem Otomasi Pertanggungjawaban Keuangan & Perjalanan Dinas",
+  "description": "Aplikasi web pengganti buku kerja Excel Macro (1. TEMPLATE PTJ.xlsm - 57 Sheet) untuk otomasi pembuatan Kuitansi, Rincian Biaya, Daftar Pengeluaran Riil, Daftar Nominatif, SPTJM, dan Terbilang Otomatis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
