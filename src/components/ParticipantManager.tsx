@@ -765,7 +765,7 @@ export const ParticipantManager: React.FC<ParticipantManagerProps> = ({
                   onClick={() => handleQuickSetTeamSlotHotel(30)}
                   className={`px-2 py-1 text-[11px] font-mono font-bold rounded border ${
                     batchPersenHotel === 30
-                      ? 'bg-red-600 text-white border-red-700'
+                      ? 'bg-slate-800 text-white border-slate-900'
                       : 'bg-white text-slate-700 border-slate-300'
                   }`}
                 >
@@ -1751,7 +1751,7 @@ export const ParticipantManager: React.FC<ParticipantManagerProps> = ({
                             className="w-11 text-center font-mono font-bold bg-white py-0.5 border border-slate-300 rounded text-[11px]"
                           />
                           <span className="text-slate-400 font-mono">×</span>
-                          <div className="flex items-center bg-red-600 text-white rounded px-1 py-0.5">
+                          <div className="flex items-center bg-white border border-slate-300 text-slate-900 rounded px-1 py-0.5">
                             <input
                               type="number"
                               min={1}
@@ -1768,7 +1768,7 @@ export const ParticipantManager: React.FC<ParticipantManagerProps> = ({
                                   gunakanTarif30Persen: val !== 100,
                                 });
                               }}
-                              className="w-7 text-center font-mono font-bold text-[11px] bg-transparent text-white focus:outline-none"
+                              className="w-7 text-center font-mono font-bold text-[11px] bg-transparent text-slate-900 focus:outline-none"
                             />
                             <span className="text-[10px] font-mono font-bold">
                               %
@@ -1800,7 +1800,7 @@ export const ParticipantManager: React.FC<ParticipantManagerProps> = ({
                               }
                               className={`px-1.5 py-0.5 rounded font-bold ${
                                 calc.persenPenginapanEfektif === 30
-                                  ? 'bg-red-600 text-white'
+                                  ? 'bg-slate-800 text-white'
                                   : 'bg-white border border-slate-300 text-slate-700'
                               }`}
                             >
@@ -2160,7 +2160,7 @@ export const ParticipantManager: React.FC<ParticipantManagerProps> = ({
                   />
                 </div>
                 <div className="sm:col-span-3">
-                  <label className="block font-semibold text-red-700 mb-1">
+                  <label className="block font-semibold text-slate-800 mb-1">
                     Slot Pengali (%)
                   </label>
                   <div className="flex items-center gap-1">
@@ -2179,7 +2179,7 @@ export const ParticipantManager: React.FC<ParticipantManagerProps> = ({
                           gunakanTarif30Persen: val !== 100,
                         });
                       }}
-                      className="w-full px-2 py-1.5 bg-red-600 text-white font-mono font-bold rounded-lg text-center"
+                      className="w-full px-2 py-1.5 bg-white border border-slate-300 text-slate-900 font-mono font-bold rounded-lg text-center"
                     />
                     <button
                       type="button"

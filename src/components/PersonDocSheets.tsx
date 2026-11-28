@@ -158,18 +158,18 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
             <td className="border-x border-black py-2 px-3">
               <div className="font-bold">Penginapan</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
-                <div className="flex items-center gap-3">
-                  <span>Selama</span>
+                <div className="flex items-center gap-3 pl-4">
                   <span className="font-mono">{p.jumlahMalam}</span>
                   <span>x</span>
-                  {p.gunakanTarif30Persen && (
-                    <>
-                      <span className="px-1.5 py-0.5 bg-red-600 text-white font-bold font-mono text-[11px]">
-                        {calc.persenPenginapanEfektif}%
-                      </span>
-                      <span>x</span>
-                    </>
-                  )}
+                  {p.gunakanTarif30Persen &&
+                    calc.persenPenginapanEfektif !== 100 && (
+                      <>
+                        <span className="font-mono">
+                          {calc.persenPenginapanEfektif}%
+                        </span>
+                        <span>x</span>
+                      </>
+                    )}
                   <span className="font-mono">
                     Rp {formatAccountingCell(p.tarifHotelPerMalam)}
                   </span>
@@ -261,30 +261,42 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
 
       {/* Blok Tanda Tangan Bendahara & Penerima */}
       <div className="grid grid-cols-2 gap-8 mt-5 text-xs">
-        <div>
+        <div className="flex flex-col">
           <div>Telah dibayar sejumlah :</div>
           <div className="font-bold font-mono flex items-center justify-between max-w-[160px] mt-0.5">
             <span>Rp</span>
             <span>{formatAccountingCell(calc.jumlahBruto)}</span>
           </div>
-          <div className="mt-6 pl-4">Bendahara Pengeluaran</div>
-          <div className="pt-14">{master.bendaharaNama}</div>
-          <div>NIP {master.bendaharaNip}</div>
+          <div className="mt-3 text-center">
+            <div className="invisible select-none" aria-hidden="true">
+              {master.kotaPenandatangan},{' '}
+              {formatTanggalIndo(
+                p.tanggalPertanggungjawaban || master.tanggalKuitansi
+              )}
+            </div>
+            <div className="mt-1">Bendahara Pengeluaran</div>
+            <div className="pt-14">{master.bendaharaNama}</div>
+            <div>NIP {master.bendaharaNip}</div>
+          </div>
         </div>
 
         <div className="flex flex-col">
           <div>Telah menerima jumlah uang sebesar :</div>
-          <div className="font-bold font-mono flex items-center justify-between max-w-[140px] mt-0.5">
+          <div className="font-bold font-mono flex items-center justify-between max-w-[160px] mt-0.5">
             <span>Rp</span>
             <span>{formatAccountingCell(calc.jumlahBruto)}</span>
           </div>
-          <div className="text-right mt-2">
-            {master.kotaPenandatangan},{' '}
-            {formatTanggalIndo(p.tanggalPertanggungjawaban || master.tanggalKuitansi)}
+          <div className="mt-3 text-center">
+            <div>
+              {master.kotaPenandatangan},{' '}
+              {formatTanggalIndo(
+                p.tanggalPertanggungjawaban || master.tanggalKuitansi
+              )}
+            </div>
+            <div className="mt-1">Yang Menerima,</div>
+            <div className="pt-14">{p.nama}</div>
+            <div className="font-mono">{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
-          <div className="text-center mt-2">Yang Menerima,</div>
-          <div className="pt-14 text-center">{p.nama}</div>
-          <div className="text-center font-mono">{p.nip}</div>
         </div>
       </div>
 
@@ -465,11 +477,15 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
                 <div className="flex items-center gap-3 pl-4">
                   <span className="font-mono">{p.jumlahMalam}</span>
                   <span>x</span>
-                  <span className="px-2 py-0.5 bg-red-600 text-white font-bold font-mono text-[11px]">
-                    {p.gunakanTarif30Persen
-                      ? `${calc.persenPenginapanEfektif}%`
-                      : '100%'}
-                  </span>
+                  {p.gunakanTarif30Persen &&
+                    calc.persenPenginapanEfektif !== 100 && (
+                      <>
+                        <span className="font-mono">
+                          {calc.persenPenginapanEfektif}%
+                        </span>
+                        <span>x</span>
+                      </>
+                    )}
                   <span className="font-mono">
                     Rp {formatAccountingCell(p.tarifHotelPerMalam)}
                   </span>
@@ -562,20 +578,28 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
 
       {/* Blok Tanda Tangan PPK & Pelaksana */}
       <div className="text-xs">
-        <div className="text-right mb-3">
-          {master.kotaPenandatangan},{' '}
-          {formatTanggalIndo(p.tanggalPertanggungjawaban || master.tanggalKuitansi)}
-        </div>
         <div className="grid grid-cols-2 gap-8 text-center">
           <div>
+            <div className="invisible select-none mb-1" aria-hidden="true">
+              {master.kotaPenandatangan},{' '}
+              {formatTanggalIndo(
+                p.tanggalPertanggungjawaban || master.tanggalKuitansi
+              )}
+            </div>
             <div>Pejabat Pembuat Komitmen,</div>
             <div className="pt-14">{master.ppkNama}</div>
             <div>NIP {master.ppkNip}</div>
           </div>
           <div>
+            <div className="mb-1">
+              {master.kotaPenandatangan},{' '}
+              {formatTanggalIndo(
+                p.tanggalPertanggungjawaban || master.tanggalKuitansi
+              )}
+            </div>
             <div>Yang Melakukan Perjalanan Dinas</div>
             <div className="pt-14">{p.nama}</div>
-            <div className="font-mono">{p.nip}</div>
+            <div className="font-mono">{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
         </div>
       </div>
@@ -710,10 +734,18 @@ export const RencanaBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
             <td className="border-x border-black py-2 px-3">
               <div className="font-bold">Penginapan</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
-                <div className="flex items-center gap-4">
-                  <span>Selama</span>
+                <div className="flex items-center gap-3 pl-4">
                   <span className="font-mono">{p.jumlahMalam}</span>
                   <span>x</span>
+                  {p.gunakanTarif30Persen &&
+                    calc.persenPenginapanEfektif !== 100 && (
+                      <>
+                        <span className="font-mono">
+                          {calc.persenPenginapanEfektif}%
+                        </span>
+                        <span>x</span>
+                      </>
+                    )}
                   <span className="font-mono">
                     Rp {formatAccountingCell(p.tarifHotelPerMalam)}
                   </span>
