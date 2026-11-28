@@ -92,15 +92,15 @@ export const PengayomanEmblemSvg: React.FC<{ className?: string }> = ({
 export const KopSuratView: React.FC<KopSuratViewProps> = ({ kop, compact = false }) => {
   return (
     <div
-      className={`w-full border-b-2 border-black pb-2.5 mb-5 ${
+      className={`w-full border-b-2 border-black pb-2 mb-3 print:pb-1.5 print:mb-2.5 ${
         compact ? 'text-xs' : ''
       }`}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         {/* Emblem / Logo */}
-        <div className="shrink-0 flex items-center justify-center w-24 h-20 pl-2">
+        <div className="shrink-0 flex items-center justify-center w-20 h-16 pl-1">
           {kop.logoPreset === 'pengayoman' || !kop.logoPreset ? (
-            <PengayomanEmblemSvg className="w-20 h-20" />
+            <PengayomanEmblemSvg className="w-16 h-16" />
           ) : kop.logoPreset === 'custom' &&
             kop.customLogoDataUrl &&
             kop.customLogoDataUrl.startsWith('data:image') ? (
@@ -108,7 +108,7 @@ export const KopSuratView: React.FC<KopSuratViewProps> = ({ kop, compact = false
               src={kop.customLogoDataUrl}
               alt="Logo Instansi"
               referrerPolicy="no-referrer"
-              className="w-20 h-20 object-contain"
+              className="w-16 h-16 object-contain"
             />
           ) : kop.logoPreset === 'instansi' ? (
             <svg

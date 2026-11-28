@@ -18,11 +18,28 @@
   font-variant-numeric: tabular-nums;
 }
 
+@page {
+  size: A4 portrait;
+  margin: 10mm 14mm;
+}
+
 @media print {
   .no-print {
     display: none !important;
   }
+  html,
   body {
     background-color: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  .print-single-page {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 }

@@ -47,19 +47,19 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
   return (
     <div
       data-testid="sheet-rincian-biaya"
-      className="bg-white border border-slate-300 shadow-xs p-8 sm:p-10 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-2 print:break-after-page"
+      className="print-single-page bg-white border border-slate-300 shadow-xs p-6 sm:p-7 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-0 print:break-after-page"
     >
       <KopSuratView kop={kopSurat} />
 
       {/* Judul Utama */}
-      <div className="text-center mb-6">
-        <h3 className="text-base font-bold uppercase tracking-wide">
+      <div className="text-center mb-3">
+        <h3 className="text-sm sm:text-base font-bold uppercase tracking-wide">
           RINCIAN BIAYA PERJALANAN DINAS
         </h3>
       </div>
 
       {/* Lampiran SPD Nomor & Tanggal */}
-      <div className="grid grid-cols-12 gap-y-1 text-xs mb-4 max-w-xl">
+      <div className="grid grid-cols-12 gap-y-0.5 text-xs mb-2.5 max-w-xl">
         <div className="col-span-4">Lampiran SPD Nomor</div>
         <div className="col-span-8 font-mono">: {p.nomorSpd}</div>
         <div className="col-span-4">Tanggal</div>
@@ -70,17 +70,17 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
       <table className="w-full border-collapse border-2 border-black text-xs">
         <thead>
           <tr className="bg-slate-200/75 font-bold text-center border-b-2 border-black">
-            <th className="border border-black py-2 px-2 w-12">No.</th>
-            <th className="border border-black py-2 px-3">PERINCIAN BIAYA</th>
-            <th className="border border-black py-2 px-3 w-40">JUMLAH</th>
-            <th className="border border-black py-2 px-3 w-36">KETERANGAN</th>
+            <th className="border border-black py-1.5 px-2 w-12">No.</th>
+            <th className="border border-black py-1.5 px-3">PERINCIAN BIAYA</th>
+            <th className="border border-black py-1.5 px-3 w-40">JUMLAH</th>
+            <th className="border border-black py-1.5 px-3 w-36">KETERANGAN</th>
           </tr>
         </thead>
         <tbody>
           {/* 1. Uang Harian Perjalanan Dinas */}
           <tr className="align-top">
-            <td className="border-x border-black pt-3 pb-2 px-2 text-center">1</td>
-            <td className="border-x border-black pt-3 pb-2 px-3">
+            <td className="border-x border-black py-1.5 px-2 text-center">1</td>
+            <td className="border-x border-black py-1.5 px-3">
               <div className="font-bold">Uang Harian Perjalanan Dinas</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <span>
@@ -91,18 +91,18 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
             </td>
-            <td className="border-x border-black pt-3 pb-2 px-3 align-bottom">
+            <td className="border-x border-black py-1.5 px-3 align-bottom">
               <AccountingAmountCell amount={calc.totalUangHarian} />
             </td>
-            <td className="border-x border-black pt-3 pb-2 px-3 text-center align-bottom">
+            <td className="border-x border-black py-1.5 px-3 text-center align-bottom">
               -
             </td>
           </tr>
 
           {/* 2. Transportasi */}
           <tr className="align-top">
-            <td className="border-x border-black py-2 px-2 text-center">2</td>
-            <td className="border-x border-black py-2 px-3 space-y-0.5">
+            <td className="border-x border-black py-1.5 px-2 text-center">2</td>
+            <td className="border-x border-black py-1.5 px-3 space-y-0.5">
               <div className="font-bold">Transportasi</div>
               <div>Pesawat:</div>
               <div className="flex items-center justify-between gap-4">
@@ -112,7 +112,7 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
 
-              <div className="pt-2">Darat:</div>
+              <div className="pt-1">Darat:</div>
               <div className="flex items-center justify-between gap-4">
                 <span>Taksi {asalLabel}</span>
                 <div className="w-32">
@@ -132,20 +132,20 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
             </td>
-            <td className="border-x border-black py-2 px-3 space-y-0.5">
+            <td className="border-x border-black py-1.5 px-3 space-y-0.5">
               <div className="invisible">Transportasi</div>
               <div className="invisible">Pesawat:</div>
               <AccountingAmountCell amount={calc.biayaTiketPP} />
-              <div className="pt-2 invisible">Darat:</div>
+              <div className="pt-1 invisible">Darat:</div>
               <AccountingAmountCell amount={calc.biayaTaksiAsal} />
               <AccountingAmountCell amount={calc.biayaTaksiProvinsi} />
               <AccountingAmountCell amount={calc.biayaTransporDarat} />
             </td>
-            <td className="border-x border-black py-2 px-3 text-center space-y-0.5">
+            <td className="border-x border-black py-1.5 px-3 text-center space-y-0.5">
               <div className="invisible">Transportasi</div>
               <div className="invisible">Pesawat:</div>
               <div>{calc.biayaTiketPP > 0 ? p.nomorTiketPP || '-' : ''}</div>
-              <div className="pt-2 invisible">Darat:</div>
+              <div className="pt-1 invisible">Darat:</div>
               <div className="invisible">-</div>
               <div className="invisible">-</div>
               <div>-</div>
@@ -154,8 +154,8 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
 
           {/* 3. Penginapan */}
           <tr className="align-top">
-            <td className="border-x border-black py-2 px-2 text-center">3</td>
-            <td className="border-x border-black py-2 px-3">
+            <td className="border-x border-black py-1.5 px-2 text-center">3</td>
+            <td className="border-x border-black py-1.5 px-3">
               <div className="font-bold">Penginapan</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <div className="flex items-center gap-3 pl-4">
@@ -181,18 +181,18 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
             </td>
-            <td className="border-x border-black py-2 px-3 align-bottom">
+            <td className="border-x border-black py-1.5 px-3 align-bottom">
               <AccountingAmountCell amount={calc.totalPenginapan} />
             </td>
-            <td className="border-x border-black py-2 px-3 text-center align-bottom">
+            <td className="border-x border-black py-1.5 px-3 text-center align-bottom">
               -
             </td>
           </tr>
 
           {/* 4. Uang Representatif */}
           <tr className="align-top">
-            <td className="border-x border-black pt-2 pb-3 px-2 text-center">4</td>
-            <td className="border-x border-black pt-2 pb-3 px-3">
+            <td className="border-x border-black py-1.5 px-2 text-center">4</td>
+            <td className="border-x border-black py-1.5 px-3">
               <div className="font-bold">Uang Representatif</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <span>
@@ -203,10 +203,10 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
             </td>
-            <td className="border-x border-black pt-2 pb-3 px-3 align-bottom">
+            <td className="border-x border-black py-1.5 px-3 align-bottom">
               <AccountingAmountCell amount={calc.totalRepresentasi} />
             </td>
-            <td className="border-x border-black pt-2 pb-3 px-3 text-center align-bottom">
+            <td className="border-x border-black py-1.5 px-3 text-center align-bottom">
               -
             </td>
           </tr>
@@ -214,8 +214,8 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
           {/* Item Riil Tambahan jika ada */}
           {p.riilItems.length > 0 && (
             <tr className="align-top">
-              <td className="border-x border-black pb-3 px-2 text-center">5</td>
-              <td className="border-x border-black pb-3 px-3">
+              <td className="border-x border-black pb-2 px-2 text-center">5</td>
+              <td className="border-x border-black pb-2 px-3">
                 <div className="font-bold">Pengeluaran Riil Lainnya</div>
                 {p.riilItems.map((r) => (
                   <div
@@ -229,10 +229,10 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                   </div>
                 ))}
               </td>
-              <td className="border-x border-black pb-3 px-3 align-bottom">
+              <td className="border-x border-black pb-2 px-3 align-bottom">
                 <AccountingAmountCell amount={calc.totalRiilTambahan} />
               </td>
-              <td className="border-x border-black pb-3 px-3 text-center align-bottom">
+              <td className="border-x border-black pb-2 px-3 text-center align-bottom">
                 -
               </td>
             </tr>
@@ -240,18 +240,18 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
 
           {/* Baris JUMLAH */}
           <tr className="border-t-2 border-black font-bold">
-            <td colSpan={2} className="border border-black py-1.5 px-3 text-center">
+            <td colSpan={2} className="border border-black py-1 px-3 text-center">
               JUMLAH
             </td>
-            <td className="border border-black py-1.5 px-3">
+            <td className="border border-black py-1 px-3">
               <AccountingAmountCell amount={calc.jumlahBruto} bold />
             </td>
-            <td className="border border-black py-1.5 px-3"></td>
+            <td className="border border-black py-1 px-3"></td>
           </tr>
 
           {/* Baris Terbilang */}
           <tr className="border-t border-black bg-slate-200/80 font-bold">
-            <td colSpan={4} className="py-1.5 px-2">
+            <td colSpan={4} className="py-1 px-2">
               <span>Terbilang :</span>
               <span className="ml-4">{calc.terbilangBruto}</span>
             </td>
@@ -260,22 +260,22 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
       </table>
 
       {/* Blok Tanda Tangan Bendahara & Penerima */}
-      <div className="grid grid-cols-2 gap-8 mt-5 text-xs">
+      <div className="grid grid-cols-2 gap-8 mt-3 text-xs break-inside-avoid">
         <div className="flex flex-col">
           <div>Telah dibayar sejumlah :</div>
           <div className="font-bold font-mono flex items-center justify-between max-w-[160px] mt-0.5">
             <span>Rp</span>
             <span>{formatAccountingCell(calc.jumlahBruto)}</span>
           </div>
-          <div className="mt-3 text-center">
+          <div className="mt-1.5 text-center">
             <div className="invisible select-none" aria-hidden="true">
               {master.kotaPenandatangan},{' '}
               {formatTanggalIndo(
                 p.tanggalPertanggungjawaban || master.tanggalKuitansi
               )}
             </div>
-            <div className="mt-1">Bendahara Pengeluaran</div>
-            <div className="pt-14">{master.bendaharaNama}</div>
+            <div className="mt-0.5">Bendahara Pengeluaran</div>
+            <div className="pt-10">{master.bendaharaNama}</div>
             <div>NIP {master.bendaharaNip}</div>
           </div>
         </div>
@@ -286,23 +286,23 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
             <span>Rp</span>
             <span>{formatAccountingCell(calc.jumlahBruto)}</span>
           </div>
-          <div className="mt-3 text-center">
+          <div className="mt-1.5 text-center">
             <div>
               {master.kotaPenandatangan},{' '}
               {formatTanggalIndo(
                 p.tanggalPertanggungjawaban || master.tanggalKuitansi
               )}
             </div>
-            <div className="mt-1">Yang Menerima,</div>
-            <div className="pt-14">{p.nama}</div>
+            <div className="mt-0.5">Yang Menerima,</div>
+            <div className="pt-10">{p.nama}</div>
             <div className="font-mono">{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
         </div>
       </div>
 
-      {/* Garis Pemisah & Perhitungan SPPD Rampung */}
-      <div className="mt-5 pt-2 border-t-2 border-black text-xs">
-        <div className="text-center font-bold mb-4">Perhitungan SPPD Rampung</div>
+      {/* Garis Pemisah & Perhitungan SPPD Rampung (1 Halaman Utuh) */}
+      <div className="mt-3 pt-2 border-t-2 border-black text-xs break-inside-avoid">
+        <div className="text-center font-bold mb-2">Perhitungan SPPD Rampung</div>
 
         <div className="grid grid-cols-12 gap-4 items-start">
           <div className="col-span-7 space-y-1">
@@ -326,9 +326,9 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
             </div>
           </div>
 
-          <div className="col-span-5 text-center pt-10">
+          <div className="col-span-5 text-center">
             <div>Pejabat Pembuat Komitmen,</div>
-            <div className="pt-12 font-semibold">{master.ppkNama}</div>
+            <div className="pt-10 font-semibold">{master.ppkNama}</div>
             <div>NIP {master.ppkNip}</div>
           </div>
         </div>
@@ -353,12 +353,12 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
   return (
     <div
       data-testid="sheet-daftar-pengeluaran-riil"
-      className="bg-white border border-slate-300 shadow-xs p-8 sm:p-10 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-2 print:break-after-page"
+      className="print-single-page bg-white border border-slate-300 shadow-xs p-6 sm:p-8 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-0 print:break-after-page"
     >
       <KopSuratView kop={kopSurat} />
 
-      <div className="text-center mb-6">
-        <h3 className="text-base font-bold uppercase tracking-wide">
+      <div className="text-center mb-3">
+        <h3 className="text-sm sm:text-base font-bold uppercase tracking-wide">
           DAFTAR PENGELUARAN RIIL
         </h3>
       </div>
@@ -562,7 +562,7 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
       </table>
 
       {/* Klausul 2 & Penutup */}
-      <div className="text-xs space-y-3 mb-6">
+      <div className="text-xs space-y-2 mb-4">
         <div className="flex items-start gap-4 pl-4">
           <span>2.</span>
           <span>
@@ -577,7 +577,7 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
       </div>
 
       {/* Blok Tanda Tangan PPK & Pelaksana */}
-      <div className="text-xs">
+      <div className="text-xs break-inside-avoid">
         <div className="grid grid-cols-2 gap-8 text-center">
           <div>
             <div className="invisible select-none mb-1" aria-hidden="true">
@@ -587,7 +587,7 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
               )}
             </div>
             <div>Pejabat Pembuat Komitmen,</div>
-            <div className="pt-14">{master.ppkNama}</div>
+            <div className="pt-11">{master.ppkNama}</div>
             <div>NIP {master.ppkNip}</div>
           </div>
           <div>
@@ -598,7 +598,7 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
               )}
             </div>
             <div>Yang Melakukan Perjalanan Dinas</div>
-            <div className="pt-14">{p.nama}</div>
+            <div className="pt-11">{p.nama}</div>
             <div className="font-mono">{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
         </div>
@@ -942,7 +942,7 @@ export const SptjmSheet: React.FC<PersonDocProps> = ({ state, p }) => {
   return (
     <div
       data-testid="sheet-sptjm-resmi"
-      className="bg-white border border-slate-300 shadow-xs p-10 sm:p-14 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-4 print:break-after-page"
+      className="print-single-page bg-white border border-slate-300 shadow-xs p-8 sm:p-10 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-0 print:break-after-page"
     >
       <KopSuratView kop={kopSurat} />
 
