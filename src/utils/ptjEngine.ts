@@ -395,13 +395,21 @@ export function calculateParticipantTotals(p: ParticipantPTJ): ParticipantCalcul
   // Kolom 21 Database: Uang yang diterima
   const uangYangDiterima = totalBiayaDatabase;
 
-  // Total pada Rincian Biaya Perjalanan Dinas & Daftar Pengeluaran Riil (termasuk Kolom 25 TRANSPORTASI DARAT)
+  // Total pada Rincian Biaya Perjalanan Dinas (termasuk seluruh komponen biaya + Kolom 25 TRANSPORTASI DARAT)
   const jumlahBruto =
     totalBiayaDatabase +
     biayaTransporDarat +
     totalRiilTambahan;
 
-  const daftarPengeluaranRiilTotal = jumlahBruto;
+  // Daftar Pengeluaran Riil: hanya yang tidak ada buktinya (Uang Harian + Transportasi Darat/Taksi + Uang Representatif + Riil Tambahan)
+  const daftarPengeluaranRiilTotal =
+    totalUangHarian +
+    biayaTaksiAsal +
+    biayaTaksiProvinsi +
+    biayaDaratSpd +
+    biayaTransporDarat +
+    totalRepresentasi +
+    totalRiilTambahan;
 
   const dibayarSemula =
     p.rencanaDibayarSemula !== undefined && p.rencanaDibayarSemula > 0

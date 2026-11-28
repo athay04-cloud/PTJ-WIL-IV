@@ -47,62 +47,64 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
   return (
     <div
       data-testid="sheet-rincian-biaya"
-      className="print-single-page bg-white border border-slate-300 shadow-xs p-6 sm:p-7 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-0 print:break-after-page"
+      className="print-single-page bg-white border border-slate-300 shadow-xs p-5 sm:p-6 max-w-4xl mx-auto text-black print:border-0 print:shadow-none print:p-0 print:break-after-page"
     >
       <KopSuratView kop={kopSurat} />
 
       {/* Judul Utama */}
-      <div className="text-center mb-3">
+      <div className="text-center mb-2">
         <h3 className="text-sm sm:text-base font-bold uppercase tracking-wide">
           RINCIAN BIAYA PERJALANAN DINAS
         </h3>
       </div>
 
       {/* Lampiran SPD Nomor & Tanggal */}
-      <div className="grid grid-cols-12 gap-y-0.5 text-xs mb-2.5 max-w-xl">
-        <div className="col-span-4">Lampiran SPD Nomor</div>
-        <div className="col-span-8 font-mono">: {p.nomorSpd}</div>
-        <div className="col-span-4">Tanggal</div>
-        <div className="col-span-8">: {formatTanggalIndo(p.tanggalSpd || master.tanggalSpd)}</div>
+      <div className="grid grid-cols-[145px_12px_1fr] gap-y-0.5 text-xs mb-2 max-w-xl">
+        <div>Lampiran SPD Nomor</div>
+        <div>:</div>
+        <div>{p.nomorSpd}</div>
+        <div>Tanggal</div>
+        <div>:</div>
+        <div>{formatTanggalIndo(p.tanggalSpd || master.tanggalSpd)}</div>
       </div>
 
       {/* Tabel Utama Rincian Biaya */}
       <table className="w-full border-collapse border-2 border-black text-xs">
         <thead>
           <tr className="bg-slate-200/75 font-bold text-center border-b-2 border-black">
-            <th className="border border-black py-1.5 px-2 w-12">No.</th>
-            <th className="border border-black py-1.5 px-3">PERINCIAN BIAYA</th>
-            <th className="border border-black py-1.5 px-3 w-40">JUMLAH</th>
-            <th className="border border-black py-1.5 px-3 w-36">KETERANGAN</th>
+            <th className="border border-black py-1 px-2 w-12">No.</th>
+            <th className="border border-black py-1 px-3">PERINCIAN BIAYA</th>
+            <th className="border border-black py-1 px-3 w-40">JUMLAH</th>
+            <th className="border border-black py-1 px-3 w-36">KETERANGAN</th>
           </tr>
         </thead>
         <tbody>
           {/* 1. Uang Harian Perjalanan Dinas */}
           <tr className="align-top">
-            <td className="border-x border-black py-1.5 px-2 text-center">1</td>
-            <td className="border-x border-black py-1.5 px-3">
+            <td className="border-x border-black py-1 px-2 text-center">1</td>
+            <td className="border-x border-black py-1 px-3">
               <div className="font-bold">Uang Harian Perjalanan Dinas</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <span>
-                  {p.jumlahHari} ({hariTerbilang}) hari x
+                  Selama {p.jumlahHari} ({hariTerbilang}) hari x
                 </span>
                 <div className="w-32">
                   <AccountingAmountCell amount={p.tarifUangHarian} />
                 </div>
               </div>
             </td>
-            <td className="border-x border-black py-1.5 px-3 align-bottom">
+            <td className="border-x border-black py-1 px-3 align-bottom">
               <AccountingAmountCell amount={calc.totalUangHarian} />
             </td>
-            <td className="border-x border-black py-1.5 px-3 text-center align-bottom">
+            <td className="border-x border-black py-1 px-3 text-center align-bottom">
               -
             </td>
           </tr>
 
           {/* 2. Transportasi */}
           <tr className="align-top">
-            <td className="border-x border-black py-1.5 px-2 text-center">2</td>
-            <td className="border-x border-black py-1.5 px-3 space-y-0.5">
+            <td className="border-x border-black py-1 px-2 text-center">2</td>
+            <td className="border-x border-black py-1 px-3 space-y-0.5">
               <div className="font-bold">Transportasi</div>
               <div>Pesawat:</div>
               <div className="flex items-center justify-between gap-4">
@@ -112,7 +114,7 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
 
-              <div className="pt-1">Darat:</div>
+              <div className="pt-0.5">Darat:</div>
               <div className="flex items-center justify-between gap-4">
                 <span>Taksi {asalLabel}</span>
                 <div className="w-32">
@@ -132,20 +134,20 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
             </td>
-            <td className="border-x border-black py-1.5 px-3 space-y-0.5">
+            <td className="border-x border-black py-1 px-3 space-y-0.5">
               <div className="invisible">Transportasi</div>
               <div className="invisible">Pesawat:</div>
               <AccountingAmountCell amount={calc.biayaTiketPP} />
-              <div className="pt-1 invisible">Darat:</div>
+              <div className="pt-0.5 invisible">Darat:</div>
               <AccountingAmountCell amount={calc.biayaTaksiAsal} />
               <AccountingAmountCell amount={calc.biayaTaksiProvinsi} />
               <AccountingAmountCell amount={calc.biayaTransporDarat} />
             </td>
-            <td className="border-x border-black py-1.5 px-3 text-center space-y-0.5">
+            <td className="border-x border-black py-1 px-3 text-center space-y-0.5">
               <div className="invisible">Transportasi</div>
               <div className="invisible">Pesawat:</div>
               <div>{calc.biayaTiketPP > 0 ? p.nomorTiketPP || '-' : ''}</div>
-              <div className="pt-1 invisible">Darat:</div>
+              <div className="pt-0.5 invisible">Darat:</div>
               <div className="invisible">-</div>
               <div className="invisible">-</div>
               <div>-</div>
@@ -154,8 +156,8 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
 
           {/* 3. Penginapan */}
           <tr className="align-top">
-            <td className="border-x border-black py-1.5 px-2 text-center">3</td>
-            <td className="border-x border-black py-1.5 px-3">
+            <td className="border-x border-black py-1 px-2 text-center">3</td>
+            <td className="border-x border-black py-1 px-3">
               <div className="font-bold">Penginapan</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <div className="flex items-center gap-3 pl-4">
@@ -181,32 +183,32 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                 </div>
               </div>
             </td>
-            <td className="border-x border-black py-1.5 px-3 align-bottom">
+            <td className="border-x border-black py-1 px-3 align-bottom">
               <AccountingAmountCell amount={calc.totalPenginapan} />
             </td>
-            <td className="border-x border-black py-1.5 px-3 text-center align-bottom">
+            <td className="border-x border-black py-1 px-3 text-center align-bottom">
               -
             </td>
           </tr>
 
           {/* 4. Uang Representatif */}
           <tr className="align-top">
-            <td className="border-x border-black py-1.5 px-2 text-center">4</td>
-            <td className="border-x border-black py-1.5 px-3">
+            <td className="border-x border-black py-1 px-2 text-center">4</td>
+            <td className="border-x border-black py-1 px-3">
               <div className="font-bold">Uang Representatif</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <span>
-                  {p.jumlahHari} ({hariTerbilang}) hari x
+                  Selama {p.jumlahHari} ({hariTerbilang}) hari x
                 </span>
                 <div className="w-32">
                   <AccountingAmountCell amount={p.uangRepresentasiPerHari} />
                 </div>
               </div>
             </td>
-            <td className="border-x border-black py-1.5 px-3 align-bottom">
+            <td className="border-x border-black py-1 px-3 align-bottom">
               <AccountingAmountCell amount={calc.totalRepresentasi} />
             </td>
-            <td className="border-x border-black py-1.5 px-3 text-center align-bottom">
+            <td className="border-x border-black py-1 px-3 text-center align-bottom">
               -
             </td>
           </tr>
@@ -214,8 +216,8 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
           {/* Item Riil Tambahan jika ada */}
           {p.riilItems.length > 0 && (
             <tr className="align-top">
-              <td className="border-x border-black pb-2 px-2 text-center">5</td>
-              <td className="border-x border-black pb-2 px-3">
+              <td className="border-x border-black pb-1.5 px-2 text-center">5</td>
+              <td className="border-x border-black pb-1.5 px-3">
                 <div className="font-bold">Pengeluaran Riil Lainnya</div>
                 {p.riilItems.map((r) => (
                   <div
@@ -229,10 +231,10 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
                   </div>
                 ))}
               </td>
-              <td className="border-x border-black pb-2 px-3 align-bottom">
+              <td className="border-x border-black pb-1.5 px-3 align-bottom">
                 <AccountingAmountCell amount={calc.totalRiilTambahan} />
               </td>
-              <td className="border-x border-black pb-2 px-3 text-center align-bottom">
+              <td className="border-x border-black pb-1.5 px-3 text-center align-bottom">
                 -
               </td>
             </tr>
@@ -260,14 +262,14 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
       </table>
 
       {/* Blok Tanda Tangan Bendahara & Penerima */}
-      <div className="grid grid-cols-2 gap-8 mt-3 text-xs break-inside-avoid">
+      <div className="grid grid-cols-2 gap-8 mt-2.5 text-xs break-inside-avoid">
         <div className="flex flex-col">
           <div>Telah dibayar sejumlah :</div>
           <div className="font-bold font-mono flex items-center justify-between max-w-[160px] mt-0.5">
             <span>Rp</span>
             <span>{formatAccountingCell(calc.jumlahBruto)}</span>
           </div>
-          <div className="mt-1.5 text-center">
+          <div className="mt-1">
             <div className="invisible select-none" aria-hidden="true">
               {master.kotaPenandatangan},{' '}
               {formatTanggalIndo(
@@ -275,7 +277,7 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
               )}
             </div>
             <div className="mt-0.5">Bendahara Pengeluaran</div>
-            <div className="pt-10">{master.bendaharaNama}</div>
+            <div className="pt-14">{master.bendaharaNama}</div>
             <div>NIP {master.bendaharaNip}</div>
           </div>
         </div>
@@ -286,7 +288,7 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
             <span>Rp</span>
             <span>{formatAccountingCell(calc.jumlahBruto)}</span>
           </div>
-          <div className="mt-1.5 text-center">
+          <div className="mt-1 pl-12">
             <div>
               {master.kotaPenandatangan},{' '}
               {formatTanggalIndo(
@@ -294,18 +296,18 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
               )}
             </div>
             <div className="mt-0.5">Yang Menerima,</div>
-            <div className="pt-10">{p.nama}</div>
-            <div className="font-mono">{p.nip ? `NIP ${p.nip}` : ''}</div>
+            <div className="pt-14">{p.nama}</div>
+            <div>{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
         </div>
       </div>
 
       {/* Garis Pemisah & Perhitungan SPPD Rampung (1 Halaman Utuh) */}
-      <div className="mt-3 pt-2 border-t-2 border-black text-xs break-inside-avoid">
-        <div className="text-center font-bold mb-2">Perhitungan SPPD Rampung</div>
+      <div className="mt-2.5 pt-1.5 border-t-2 border-black text-xs break-inside-avoid">
+        <div className="text-center font-bold mb-1.5">Perhitungan SPPD Rampung</div>
 
-        <div className="grid grid-cols-12 gap-4 items-start">
-          <div className="col-span-7 space-y-1">
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-7 space-y-0.5">
             <div className="grid grid-cols-12 items-center">
               <div className="col-span-7">Ditetapkan sejumlah</div>
               <div className="col-span-5">
@@ -325,10 +327,13 @@ export const RincianBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="col-span-5 text-center">
+        <div className="grid grid-cols-2 gap-8 mt-2.5">
+          <div></div>
+          <div className="pl-12 text-left">
             <div>Pejabat Pembuat Komitmen,</div>
-            <div className="pt-10 font-semibold">{master.ppkNama}</div>
+            <div className="pt-14 font-semibold">{master.ppkNama}</div>
             <div>NIP {master.ppkNip}</div>
           </div>
         </div>
@@ -365,18 +370,21 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
 
       <div className="text-xs space-y-1.5 mb-4">
         <div>Yang bertanda tangan dibawah ini :</div>
-        <div className="grid grid-cols-12 gap-y-1 pt-2 max-w-xl">
-          <div className="col-span-4">Nama</div>
-          <div className="col-span-8">: {p.nama}</div>
-          <div className="col-span-4">NIP</div>
-          <div className="col-span-8 font-mono">: {p.nip}</div>
-          <div className="col-span-4">Jabatan</div>
-          <div className="col-span-8">: {p.jabatan}</div>
+        <div className="grid grid-cols-[145px_12px_1fr] gap-y-1 pt-2 max-w-xl">
+          <div>Nama</div>
+          <div>:</div>
+          <div>{p.nama}</div>
+          <div>NIP</div>
+          <div>:</div>
+          <div>{p.nip}</div>
+          <div>Jabatan</div>
+          <div>:</div>
+          <div>{p.jabatan}</div>
         </div>
 
         <div className="pt-3 leading-relaxed">
           Berdasarkan Surat Perintah Perjalanan Dinas (SPPD) Nomor :{' '}
-          <span className="font-mono px-2">{p.nomorSpd}</span> pada tanggal{' '}
+          <span className="px-1">{p.nomorSpd}</span> pada tanggal{' '}
           <span>{formatTanggalIndo(p.tanggalSpd || master.tanggalSpd)}</span> dengan ini kami menyatakan
           dengan sesungguhnya bahwa :
         </div>
@@ -420,22 +428,13 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
             </td>
           </tr>
 
-          {/* 2. Transportasi */}
+          {/* 2. Transportasi Darat (Tanpa Bukti / Tanpa Pesawat) */}
           <tr className="align-top">
             <td className="border-x border-black py-2 px-2 text-center">
               {++rowNo}
             </td>
             <td className="border-x border-black py-2 px-3 space-y-0.5">
-              <div className="font-bold">Transportasi</div>
-              <div>Pesawat:</div>
-              <div className="flex items-center justify-between gap-4">
-                <span>{asalLabel} - Tujuan PP</span>
-                <div className="w-36">
-                  <AccountingAmountCell amount={calc.biayaTiketPP} />
-                </div>
-              </div>
-
-              <div className="pt-2">Darat:</div>
+              <div className="font-bold">Transportasi Darat</div>
               <div className="flex items-center justify-between gap-4">
                 <span>Taksi {asalLabel}</span>
                 <div className="w-36">
@@ -456,53 +455,14 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
               </div>
             </td>
             <td className="border-x border-black py-2 px-3 space-y-0.5">
-              <div className="invisible">Transportasi</div>
-              <div className="invisible">Pesawat:</div>
-              <AccountingAmountCell amount={calc.biayaTiketPP} />
-              <div className="pt-2 invisible">Darat:</div>
+              <div className="invisible">Transportasi Darat</div>
               <AccountingAmountCell amount={calc.biayaTaksiAsal} />
               <AccountingAmountCell amount={calc.biayaTaksiProvinsi} />
               <AccountingAmountCell amount={calc.biayaTransporDarat} />
             </td>
           </tr>
 
-          {/* 3. Penginapan (Dengan Slot Pengali 30% sesuai DPR_DLL.pdf) */}
-          <tr className="align-top" data-testid="dpr-row-penginapan">
-            <td className="border-x border-black py-2 px-2 text-center">
-              {++rowNo}
-            </td>
-            <td className="border-x border-black py-2 px-3">
-              <div>Penginapan</div>
-              <div className="flex items-center justify-between gap-4 mt-0.5">
-                <div className="flex items-center gap-3 pl-4">
-                  <span className="font-mono">{p.jumlahMalam}</span>
-                  <span>x</span>
-                  {p.gunakanTarif30Persen &&
-                    calc.persenPenginapanEfektif !== 100 && (
-                      <>
-                        <span className="font-mono">
-                          {calc.persenPenginapanEfektif}%
-                        </span>
-                        <span>x</span>
-                      </>
-                    )}
-                  <span className="font-mono">
-                    Rp {formatAccountingCell(p.tarifHotelPerMalam)}
-                  </span>
-                </div>
-                <div className="w-36">
-                  <AccountingAmountCell
-                    amount={p.jumlahMalam > 0 ? calc.tarifHotelEfektifPerMalam : 0}
-                  />
-                </div>
-              </div>
-            </td>
-            <td className="border-x border-black py-2 px-3 align-bottom">
-              <AccountingAmountCell amount={calc.totalPenginapan} />
-            </td>
-          </tr>
-
-          {/* 4. Uang Representatif */}
+          {/* 3. Uang Representatif */}
           <tr className="align-top" data-testid="dpr-row-representatif">
             <td className="border-x border-black pt-2 pb-2 px-2 text-center">
               {++rowNo}
@@ -578,8 +538,8 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
 
       {/* Blok Tanda Tangan PPK & Pelaksana */}
       <div className="text-xs break-inside-avoid">
-        <div className="grid grid-cols-2 gap-8 text-center">
-          <div>
+        <div className="grid grid-cols-2 gap-8">
+          <div className="pl-6">
             <div className="invisible select-none mb-1" aria-hidden="true">
               {master.kotaPenandatangan},{' '}
               {formatTanggalIndo(
@@ -587,10 +547,10 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
               )}
             </div>
             <div>Pejabat Pembuat Komitmen,</div>
-            <div className="pt-11">{master.ppkNama}</div>
+            <div className="pt-16">{master.ppkNama}</div>
             <div>NIP {master.ppkNip}</div>
           </div>
-          <div>
+          <div className="pl-12">
             <div className="mb-1">
               {master.kotaPenandatangan},{' '}
               {formatTanggalIndo(
@@ -598,8 +558,8 @@ export const DaftarPengeluaranRiilSheet: React.FC<PersonDocProps> = ({ state, p 
               )}
             </div>
             <div>Yang Melakukan Perjalanan Dinas</div>
-            <div className="pt-11">{p.nama}</div>
-            <div className="font-mono">{p.nip ? `NIP ${p.nip}` : ''}</div>
+            <div className="pt-16">{p.nama}</div>
+            <div>{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
         </div>
       </div>
@@ -631,23 +591,27 @@ export const RencanaBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
         </h3>
       </div>
 
-      <div className="grid grid-cols-12 gap-y-1 text-xs mb-4">
-        <div className="col-span-3">Dasar Surat Tugas</div>
-        <div className="col-span-9 font-mono">
-          : {p.nomorSuratTugas || master.nomorSuratTugas} (
+      <div className="grid grid-cols-[145px_12px_1fr] gap-y-1 text-xs mb-4">
+        <div>Dasar Surat Tugas</div>
+        <div>:</div>
+        <div>
+          {p.nomorSuratTugas || master.nomorSuratTugas} (
           {formatTanggalIndo(p.tanggalSuratTugas || master.tanggalSuratTugas)})
         </div>
-        <div className="col-span-3">Nomor SPPD</div>
-        <div className="col-span-9 font-mono">
-          : {p.nomorSpd} ({formatTanggalIndo(p.tanggalSpd || master.tanggalSpd)})
+        <div>Nomor SPPD</div>
+        <div>:</div>
+        <div>
+          {p.nomorSpd} ({formatTanggalIndo(p.tanggalSpd || master.tanggalSpd)})
         </div>
-        <div className="col-span-3">Pelaksana / NIP</div>
-        <div className="col-span-9">
-          : <strong>{p.nama}</strong> / NIP {p.nip} ({p.jabatan})
+        <div>Pelaksana / NIP</div>
+        <div>:</div>
+        <div>
+          <strong>{p.nama}</strong> / NIP {p.nip} ({p.jabatan})
         </div>
-        <div className="col-span-3">Tujuan / Waktu</div>
-        <div className="col-span-9">
-          : {master.lokasiAsal} – {master.lokasiTujuan} ({p.jumlahHari} hari:{' '}
+        <div>Tujuan / Waktu</div>
+        <div>:</div>
+        <div>
+          {master.lokasiAsal} – {master.lokasiTujuan} ({p.jumlahHari} hari:{' '}
           {formatTanggalIndo(master.tanggalMulai)} s.d.{' '}
           {formatTanggalIndo(master.tanggalSelesai)})
         </div>
@@ -669,7 +633,7 @@ export const RencanaBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
               <div className="font-bold">Uang Harian Perjalanan Dinas</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <span>
-                  {p.jumlahHari} ({hariTerbilang}) hari x
+                  Selama {p.jumlahHari} ({hariTerbilang}) hari x
                 </span>
                 <div className="w-32">
                   <AccountingAmountCell amount={p.tarifUangHarian} />
@@ -771,7 +735,7 @@ export const RencanaBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
               <div className="font-bold">Uang Representatif</div>
               <div className="flex items-center justify-between gap-4 mt-0.5">
                 <span>
-                  {p.jumlahHari} ({hariTerbilang}) hari x
+                  Selama {p.jumlahHari} ({hariTerbilang}) hari x
                 </span>
                 <div className="w-32">
                   <AccountingAmountCell amount={p.uangRepresentasiPerHari} />
@@ -820,7 +784,7 @@ export const RencanaBiayaSheet: React.FC<PersonDocProps> = ({ state, p }) => {
           </div>
           <div className="font-semibold">Pelaksana Perjalanan Dinas,</div>
           <div className="pt-14 font-bold">{p.nama}</div>
-          <div className="font-mono">{p.nip}</div>
+          <div>{p.nip ? `NIP ${p.nip}` : ''}</div>
         </div>
       </div>
     </div>
@@ -925,7 +889,7 @@ export const KuitansiSheet: React.FC<PersonDocProps> = ({ state, p }) => {
           </div>
           <div className="pt-12">
             <div className="font-bold underline">{p.nama}</div>
-            <div className="font-mono text-[11px]">{p.nip}</div>
+            <div className="font-mono text-[11px]">{p.nip ? `NIP ${p.nip}` : ''}</div>
           </div>
         </div>
       </div>
@@ -955,13 +919,16 @@ export const SptjmSheet: React.FC<PersonDocProps> = ({ state, p }) => {
       <div className="text-xs sm:text-[13px] leading-relaxed space-y-4">
         <div>Yang bertanda tangan di bawah ini:</div>
 
-        <div className="grid grid-cols-12 gap-y-1 max-w-xl">
-          <div className="col-span-3">Nama</div>
-          <div className="col-span-9">: &nbsp;{p.nama}</div>
-          <div className="col-span-3">NIP</div>
-          <div className="col-span-9">: &nbsp;{p.nip}</div>
-          <div className="col-span-3">Jabatan</div>
-          <div className="col-span-9">: &nbsp;{p.jabatan}</div>
+        <div className="grid grid-cols-[145px_12px_1fr] gap-y-1 max-w-xl">
+          <div>Nama</div>
+          <div>:</div>
+          <div>{p.nama}</div>
+          <div>NIP</div>
+          <div>:</div>
+          <div>{p.nip}</div>
+          <div>Jabatan</div>
+          <div>:</div>
+          <div>{p.jabatan}</div>
         </div>
 
         <div className="pt-1">Menyatakan dengan sesungguhnya bahwa:</div>
@@ -1019,7 +986,7 @@ export const SptjmSheet: React.FC<PersonDocProps> = ({ state, p }) => {
           </div>
           <div>Pegawai yang Melakukan Perjalanan Dinas</div>
           <div className="pt-16">{p.nama}</div>
-          <div>{p.nip}</div>
+          <div>{p.nip ? `NIP ${p.nip}` : ''}</div>
         </div>
       </div>
     </div>
