@@ -1038,7 +1038,7 @@ export function createDummyPTJState(): PTJWorkbookState {
       eselon1: 'INSPEKTORAT JENDERAL',
       satkerName: '',
       alamat: 'Jalan H.R. Rasuna Said Kav. 6-7, Kuningan Jakarta Selatan',
-      teleponEmail: 'Telepon: 021-5252975; Faksimile021-5252975',
+      teleponEmail: 'Telepon: 021-5252975; Faksimile: 021-5252975',
       website: 'Laman: http://www.itjen.kemenkum.go.id, Pos-ell: itjen@kemenkum.go.id',
       logoPreset: 'pengayoman',
       customLogoDataUrl: '/assets/aistudio/image_48266e5e.png',

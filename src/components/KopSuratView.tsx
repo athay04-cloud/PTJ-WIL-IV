@@ -183,7 +183,12 @@ export const KopSuratView: React.FC<KopSuratViewProps> = ({ kop, compact = false
             </div>
           )}
           <div className="text-xs mt-0.5">{kop.alamat}</div>
-          <div className="text-xs">{kop.teleponEmail}</div>
+          <div className="text-xs">
+            {(kop.teleponEmail || 'Telepon: 021-5252975; Faksimile: 021-5252975').replace(
+              'Faksimile021-5252975',
+              'Faksimile: 021-5252975'
+            )}
+          </div>
           {kop.website && <div className="text-xs">{kop.website}</div>}
         </div>
       </div>

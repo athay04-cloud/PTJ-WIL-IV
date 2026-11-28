@@ -39,6 +39,12 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && parsed.master && Array.isArray(parsed.participants)) {
+          if (parsed.kopSurat?.teleponEmail) {
+            parsed.kopSurat.teleponEmail = parsed.kopSurat.teleponEmail.replace(
+              'Faksimile021-5252975',
+              'Faksimile: 021-5252975'
+            );
+          }
           return parsed;
         }
       }
@@ -250,8 +256,10 @@ export default function App() {
                 'Jalan H.R. Rasuna Said Kav. 6-7, Kuningan Jakarta Selatan'}
             </div>
             <div className="py-0.5 px-4 border-b border-slate-400/60 bg-[#d9d9d9] text-black">
-              {state.kopSurat.teleponEmail ||
-                'Telepon: 021-5252975; Faksimile021-5252975'}
+              {(
+                state.kopSurat.teleponEmail ||
+                'Telepon: 021-5252975; Faksimile: 021-5252975'
+              ).replace('Faksimile021-5252975', 'Faksimile: 021-5252975')}
             </div>
             <div className="py-0.5 px-4 border-b-2 border-emerald-800 bg-white text-black">
               {state.kopSurat.website ||
